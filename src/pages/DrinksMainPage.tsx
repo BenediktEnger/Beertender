@@ -1,8 +1,8 @@
 import {Container, Typography} from "@mui/material";
 import DrinkSearchField from "../components/DrinkSearchField/DrinkSearchField.tsx";
 import DrinkCardContainer from "../components/DrinkCard/DrinkCardContainer.tsx";
-import {PinteDrinks} from "../data/pinte-drinks.fixture.ts";
-import useLocalStorage from "../hooks/useLocalStorage.ts";
+import {PinteDrinks} from "../infrastructure/fixture/pinte-drinks.fixture.ts";
+import useLocalStorage from "../infrastructure/localStorage/local-user-storage-drinks.adapter.ts";
 
 export interface CurrentDrink {
     drink: Drink
