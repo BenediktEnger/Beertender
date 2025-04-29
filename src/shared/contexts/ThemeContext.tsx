@@ -1,11 +1,22 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { THEMES } from '../../constants';
+import { createTheme, ThemeOptions, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 
+// Define your theme options for each theme name
+const themeOptions: Record<string, ThemeOptions> = {
+  DEFAULT: {
+    palette: {
+      primary: { main: '#1976d2', // Your primary color
+      },
+      // Add other palette colors as needed
+    },
+  },
+  // Add other themes if needed
+};
 
 const initialState = {
-  theme: THEMES.DEFAULT,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  setTheme: (theme: string) => {},
+  themeName: THEMES.DEFAULT,
+  setTheme: (themeName: string) => {},
 };
 const ThemeContext = React.createContext(initialState);
 
@@ -14,7 +25,7 @@ type ThemeProviderProps = {
 }
 
 function ThemeProvider({ children }: ThemeProviderProps) {
-  const [theme, _setTheme] = React.useState<string>(initialState.theme);
+  const [themeName, _setTheme] = React.useState<string>(initialState.themeName);
 
   useEffect(() => {
     const storedTheme = localStorage.getItem('theme');
@@ -29,13 +40,20 @@ function ThemeProvider({ children }: ThemeProviderProps) {
   }, []);
 
   const contextValue = useMemo(() => ({
-    theme,
+    themeName,
     setTheme,
-  }), [theme, setTheme]);
+  }), [themeName, setTheme]);
+
+  // Create the actual MUI theme based on the selected theme name
+  const muiTheme = useMemo(() => createTheme(themeOptions[themeName] || themeOptions[THEMES.DEFAULT]),
+    [themeName],
+  );
 
   return (
     <ThemeContext.Provider value={contextValue}>
-      {children}
+      <MuiThemeProvider theme={muiTheme}>
+        {children}
+      </MuiThemeProvider>
     </ThemeContext.Provider>
   );
 }

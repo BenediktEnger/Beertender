@@ -1,53 +1,45 @@
-import { Grid, Typography, Box, useTheme } from '@mui/material';
+import { Grid } from '@mui/material';
 import DrinkCard from './DrinkCard.tsx';
 import React from 'react';
 import { DrinkDto } from '../../dtos/drink.dto.ts';
 import LocalBarIcon from '@mui/icons-material/LocalBar';
+import {
+  CardGrid,
+  EmptyStateContainer,
+  EmptyStateIcon,
+  EmptyStateSubtitle,
+  EmptyStateTitle,
+} from './DrinkCardContainer.styles.tsx';
 
 interface DrinkCardContainerProps {
     currentDrinks: DrinkDto[]
     onIncreaseDrinkCount: (drink: DrinkDto) => void;
 }
 
-const DrinkCardContainer: React.FC<DrinkCardContainerProps> = ({ currentDrinks, onIncreaseDrinkCount }) => {
-  const theme = useTheme();
+const DrinkCardContainer: React.FC<DrinkCardContainerProps> = ({ currentDrinks, onIncreaseDrinkCount }) => <CardGrid container spacing={3}>
+  {currentDrinks.map((drink) => <Grid size={{
+    xs: 6,
+    md: 4, 
+  }} key={drink.name + drink.category}>
+    <DrinkCard
+      drink={drink}
+      onIncrease={() => onIncreaseDrinkCount(drink)}
+    />
+  </Grid>,
+  )}
 
-  return (
-    <Grid container spacing={3}>
-      {currentDrinks.map((drink) => (
-        <Grid item xs={12} sm={6} md={4} key={drink.name + drink.category}>
-          <DrinkCard
-            drink={drink}
-            onIncrease={() => onIncreaseDrinkCount(drink)}
-          />
-        </Grid>
-      ))}
-
-      {currentDrinks.length === 0 && (
-        <Box 
-          width="100%" 
-          display="flex" 
-          flexDirection="column" 
-          alignItems="center" 
-          justifyContent="center" 
-          py={6}
-          sx={{
-            color: theme.palette.text.secondary,
-            opacity: 0.8
-          }}
-        >
-          <LocalBarIcon sx={{ fontSize: 48, mb: 2, opacity: 0.6 }} />
-          <Typography variant="h6" align="center" sx={{ fontWeight: 500 }}>
+  {currentDrinks.length === 0 && 
+        <EmptyStateContainer>
+          <EmptyStateIcon>
+            <LocalBarIcon />
+          </EmptyStateIcon>
+          <EmptyStateTitle variant="h6" align="center">
             No drinks added yet
-          </Typography>
-          <Typography variant="body2" align="center" sx={{ mt: 1 }}>
+          </EmptyStateTitle>
+          <EmptyStateSubtitle variant="body2" align="center">
             Search for drinks above and add them to your collection
-          </Typography>
-        </Box>
-      )}
-    </Grid>
-  );
-};
-
-
+          </EmptyStateSubtitle>
+        </EmptyStateContainer>
+  }
+</CardGrid>;
 export default DrinkCardContainer;
