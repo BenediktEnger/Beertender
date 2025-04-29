@@ -2,17 +2,24 @@ import App from './App';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from './shared/contexts/ThemeContext';
-import StyledSnackbarProvider from './shared/contexts/StyledSnackbarContext';
+import { DomainServiceProvider } from './shared/contexts/ServiceContext';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { StrictMode } from 'react';
 
 const container = document.getElementById('root');
 const root = createRoot(container!);
+const queryClient = new QueryClient();
 
 root.render(
-  <BrowserRouter>
-    <ThemeProvider>
-      <StyledSnackbarProvider>
-        <App />
-      </StyledSnackbarProvider>
-    </ThemeProvider>
-  </BrowserRouter>,
+  <StrictMode>
+    <BrowserRouter>
+      <ThemeProvider>
+        <QueryClientProvider client={queryClient}>
+          <DomainServiceProvider>
+            <App />
+          </DomainServiceProvider>
+        </QueryClientProvider>
+      </ThemeProvider>
+    </BrowserRouter>
+  </StrictMode>,
 );

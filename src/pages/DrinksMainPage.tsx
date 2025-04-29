@@ -1,44 +1,47 @@
-import {Container, Typography} from "@mui/material";
-import DrinkSearchField from "../components/DrinkSearchField/DrinkSearchField.tsx";
-import DrinkCardContainer from "../components/DrinkCard/DrinkCardContainer.tsx";
-import {PinteDrinks} from "../infrastructure/fixture/pinte-drinks.fixture.ts";
-import useLocalStorage from "../infrastructure/localStorage/local-user-storage-drinks.adapter.ts";
-
-export interface CurrentDrink {
-    drink: Drink
-    count: number
-}
+import { Box, CircularProgress, Container, Typography } from '@mui/material';
+import DrinkSearchField from '../components/DrinkSearchField/DrinkSearchField.tsx';
+import useGetAllDrinks from '../hooks/useGetAllDrinks.ts';
+import { DrinkDto } from '../dtos/drink.dto.ts';
+import useAddUserDrink from '../hooks/useAddUserDrinks.ts';
+import useGetUserDrinks from '../hooks/useGetUserDrinks.ts';
+import DrinkCardContainer from '../components/DrinkCard/DrinkCardContainer.tsx';
 
 const DrinksMainPage = () => {
-    const [currentDrinks, setCurrentDrinks] = useLocalStorage<CurrentDrink[]>('currentDrinks', []);
+  const { data: allDrinksDto } = useGetAllDrinks();
+  const { mutate: addUserDrink } = useAddUserDrink();
+  const { data: userDrinksDto } = useGetUserDrinks();
 
-    const increaseDrinkCount = (drinkToIncrease: Drink) => {
-        setCurrentDrinks(previousDrinks =>
-            previousDrinks.map(drink =>
-                drink.drink.name === drinkToIncrease.name && drink.drink.type === drinkToIncrease.type
-                    ? { ...drink, count: drink.count + 1 }
-                    : drink
-            )
-        );
-    };
+  const handleAddDrink = (drink: DrinkDto) => {
+    if (drink) {
+      addUserDrink(drink);
+    }
+  };
 
-    const handleAddDrink = (drink: string) => {
-        const newDrinkObject = PinteDrinks.find((d) => d.name === drink);
-        if (newDrinkObject) {
-            setCurrentDrinks(prev => [...prev, { drink: newDrinkObject, count: 1 }])
-        }
-    };
+  return (
+    <Container maxWidth="sm" sx={{ mt: 4 }}>
+      <Typography variant="h4" gutterBottom align="center">
+                Beertender
+      </Typography>
 
-    return(
-        <Container maxWidth="sm" sx={{ mt: 4 }}>
-            <Typography variant="h4" gutterBottom align="center">
-                Drink Tracker
-            </Typography>
-            <DrinkSearchField drinkSelections={PinteDrinks.map((d) => d.name)} onAddDrink={handleAddDrink} />
+      {!allDrinksDto ?
+        <Box display="flex" justifyContent="center" my={4}>
+          <CircularProgress />
+        </Box>
+        : 
+        <DrinkSearchField drinkSelections={allDrinksDto} onAddDrink={handleAddDrink} />
+      }
 
-            <DrinkCardContainer currentDrinks={currentDrinks} onIncreaseDrinkCount={increaseDrinkCount} />
-        </Container>
-    )
-}
+      {!userDrinksDto ?
+        <Box display="flex" justifyContent="center" my={4}>
+          <CircularProgress />
+        </Box>
+        :
+        <DrinkCardContainer currentDrinks={userDrinksDto} onIncreaseDrinkCount={handleAddDrink} />
+      }
+
+
+    </Container>
+  );
+};
 
 export default DrinksMainPage;

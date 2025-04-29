@@ -15,11 +15,11 @@ export class DrinkEntity {
   private _price: number;
   private _count: number;
 
-  constructor(name: string, category: string, price: number) {
+  constructor(name: string, category: string, price: number, count?: number) {
     this._name = name;
     this._category = category;
     this._price = price;
-    this._count = 1;
+    this._count = count ?? 1;
   }
 
   public increaseCount() {
@@ -30,8 +30,16 @@ export class DrinkEntity {
     return this._price * this._count;
   }
 
+  public getSinglePrice() {
+    return this._price;
+  }
+
   public get category() {
     return this._category;
+  }
+
+  public get count() {
+    return this._count;
   }
 
   public get name() {

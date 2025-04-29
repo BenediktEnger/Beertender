@@ -3,6 +3,7 @@ import GetAllDrinksPort from '../../domain/ports/driven/get-all-drinks.port.ts';
 import { PinteDrinks } from './pinte-drinks.fixture.ts';
 
 export default class LocalFixtureDrinksAdapter implements GetAllDrinksPort {
+  // eslint-disable-next-line class-methods-use-this
   public getAllDrinks(): Promise<DrinkEntity[]> {
     const drinks = PinteDrinks;
     const drinkEntities: DrinkEntity[] = drinks.map((drink) => {

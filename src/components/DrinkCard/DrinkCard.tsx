@@ -1,11 +1,11 @@
 import React from 'react';
-import {Box, Card, CardContent, Divider, IconButton, Stack, Tooltip, Typography} from '@mui/material';
+import { Box, Card, CardContent, Divider, IconButton, Stack, Tooltip, Typography } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import LocalDrinkIcon from '@mui/icons-material/LocalDrink';
 import EmojiFoodBeverageIcon from '@mui/icons-material/EmojiFoodBeverage';
 import BeerIcon from '@mui/icons-material/SportsBar';
 import WineBarIcon from '@mui/icons-material/WineBar';
-import {CurrentDrink} from "../../pages/DrinksMainPage.tsx";
+import { DrinkDto } from '../../dtos/drink.dto.ts';
 
 function getDrinkIcon(type: string) {
   switch (type) {
@@ -38,11 +38,11 @@ function getDrinkIcon(type: string) {
 }
 
 interface DrinkCardProps {
-    drinkGroup: CurrentDrink;
+    drink: DrinkDto;
     onIncrease: () => void;
 }
 
-const DrinkCard: React.FC<DrinkCardProps> = ({ drinkGroup , onIncrease}) => <Card
+const DrinkCard: React.FC<DrinkCardProps> = ({ drink, onIncrease }) => <Card
   variant="outlined"
   sx={{
     borderRadius: 3,
@@ -58,17 +58,17 @@ const DrinkCard: React.FC<DrinkCardProps> = ({ drinkGroup , onIncrease}) => <Car
 >
   <CardContent>
     <Stack direction="row" alignItems="center" spacing={2} mb={1}>
-      {getDrinkIcon(drinkGroup.drink.type)}
+      {getDrinkIcon(drink.category)}
       <Box>
         <Typography variant="h6" component="div">
-          {drinkGroup.drink.name}
+          {drink.name}
         </Typography>
       </Box>
     </Stack>
     <Divider sx={{ my: 1 }} />
     <Stack direction="row" alignItems="center" spacing={1} mt={1}>
       <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-                    Count: {drinkGroup.count}
+                    Count: {drink.count}
       </Typography>
       <Tooltip title="Add one more">
         <IconButton color="primary" onClick={onIncrease} aria-label="increase count">

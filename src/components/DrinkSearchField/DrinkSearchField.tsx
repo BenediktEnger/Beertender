@@ -1,34 +1,50 @@
 import { Autocomplete, Box, Button, TextField } from '@mui/material';
 import { useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
+import { DrinkDto } from '../../dtos/drink.dto.ts';
 
 interface DrinkSearchFieldProps {
-    drinkSelections: string[]
-    onAddDrink: (drink: string) => void
+    drinkSelections: DrinkDto[]
+    onAddDrink: (drink: DrinkDto) => void
 }
 const DrinkSearchField: React.FC<DrinkSearchFieldProps> = ({ drinkSelections, onAddDrink }) => {
-  const [selectedDrink, setSelectedDrink] = useState('');
+  const initializeSelectedDrink = () => ({
+    name: '',
+    category: '',
+    price: 0,
+    count: 0,
+  });
+
+  const [selectedDrink, setSelectedDrink] = useState<DrinkDto>(initializeSelectedDrink);
+  
   return (
     <Box
       component="form"
       onSubmit={(e) => {
         e.preventDefault();
         onAddDrink(selectedDrink);
-        setSelectedDrink('');
+        setSelectedDrink(initializeSelectedDrink());
       }}
       sx={{
         display: 'flex',
         gap: 2,
         alignItems: 'center',
-        mb: 3, 
+        mb: 3,
       }}
     >
 
       <Autocomplete
         sx={{ flex: 1 }}
+        getOptionLabel={(option) => option.name}
         options={drinkSelections}
-        onInputChange={(_, newInput) => setSelectedDrink(newInput)}
         value={selectedDrink}
+        onChange={(_, selectedOption) => {
+          if (selectedOption) {
+            setSelectedDrink(selectedOption);
+          } else {
+            setSelectedDrink(initializeSelectedDrink());
+          }
+        }}
         renderInput={(params) => <TextField
           {...params}
           label="Search or add a drink"
