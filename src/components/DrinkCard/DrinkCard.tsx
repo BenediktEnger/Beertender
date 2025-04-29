@@ -42,40 +42,102 @@ interface DrinkCardProps {
     onIncrease: () => void;
 }
 
-const DrinkCard: React.FC<DrinkCardProps> = ({ drink, onIncrease }) => <Card
-  variant="outlined"
-  sx={{
-    borderRadius: 3,
-    boxShadow: 3,
-    p: 1.5,
-    bgcolor: 'background.paper',
-    transition: '0.2s',
-    ':hover': {
-      boxShadow: 6,
-      transform: 'scale(1.02)', 
-    },
-  }}
->
-  <CardContent>
-    <Stack direction="row" alignItems="center" spacing={2} mb={1}>
-      {getDrinkIcon(drink.category)}
-      <Box>
-        <Typography variant="h6" component="div">
+const DrinkCard: React.FC<DrinkCardProps> = ({ drink, onIncrease }) => {
+  const categoryIcon = getDrinkIcon(drink.category);
+
+  return (
+    <Card
+      elevation={2}
+      sx={{
+        borderRadius: 2,
+        overflow: 'hidden',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        transition: 'all 0.3s ease',
+        ':hover': {
+          transform: 'translateY(-4px)',
+          boxShadow: '0 12px 20px rgba(0, 0, 0, 0.1)',
+        },
+      }}
+    >
+      <Box 
+        sx={{ 
+          p: 2, 
+          background: (theme) => `linear-gradient(45deg, ${theme.palette.primary.main}80 0%, ${theme.palette.primary.main}20 100%)`,
+          display: 'flex',
+          alignItems: 'center',
+          gap: 2
+        }}
+      >
+        <Box 
+          sx={{ 
+            borderRadius: '50%', 
+            p: 1.5, 
+            bgcolor: 'white',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
+          }}
+        >
+          {categoryIcon}
+        </Box>
+        <Typography 
+          variant="h6" 
+          component="div" 
+          sx={{ 
+            fontWeight: 600,
+            color: 'white',
+            textShadow: '0 1px 2px rgba(0,0,0,0.2)'
+          }}
+        >
           {drink.name}
         </Typography>
       </Box>
-    </Stack>
-    <Divider sx={{ my: 1 }} />
-    <Stack direction="row" alignItems="center" spacing={1} mt={1}>
-      <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-                    Count: {drink.count}
-      </Typography>
-      <Tooltip title="Add one more">
-        <IconButton color="primary" onClick={onIncrease} aria-label="increase count">
-          <AddCircleOutlineIcon />
-        </IconButton>
-      </Tooltip>
-    </Stack>
-  </CardContent>
-</Card>;
+
+      <CardContent sx={{ flexGrow: 1, p: 2 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 1 }}>
+          <Box>
+            <Typography variant="body2" color="text.secondary" gutterBottom>
+              Category
+            </Typography>
+            <Typography variant="body1" sx={{ fontWeight: 500 }}>
+              {drink.category}
+            </Typography>
+          </Box>
+
+          <Box sx={{ textAlign: 'right' }}>
+            <Typography variant="body2" color="text.secondary" gutterBottom>
+              Count
+            </Typography>
+            <Typography variant="h6" sx={{ fontWeight: 700, color: 'primary.main' }}>
+              {drink.count}
+            </Typography>
+          </Box>
+        </Box>
+      </CardContent>
+
+      <Divider />
+
+      <Box sx={{ p: 1.5, display: 'flex', justifyContent: 'flex-end' }}>
+        <Tooltip title="Add one more">
+          <IconButton 
+            color="primary" 
+            onClick={onIncrease} 
+            aria-label="increase count"
+            sx={{
+              bgcolor: 'rgba(25, 118, 210, 0.08)',
+              '&:hover': {
+                bgcolor: 'rgba(25, 118, 210, 0.15)',
+              }
+            }}
+          >
+            <AddCircleOutlineIcon />
+          </IconButton>
+        </Tooltip>
+      </Box>
+    </Card>
+  );
+};
 export default DrinkCard;
