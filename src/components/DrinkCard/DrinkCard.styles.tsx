@@ -51,28 +51,26 @@ export const ContentRow = styled(Box)`
   margin-top: 4px;
 `;
 
-export const CategoryContainer = styled(Box)``;
-
 export const CountContainer = styled(Box)`
-  text-align: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 8px;
+
+
 `;
 
-export const CategoryLabel = styled(Typography)`
-  color: ${(props) => props.theme.palette.text.secondary};
+export const LeftCountValue = styled(Typography)`
+    font-weight: 700;
+    color: ${(props) => props.theme.palette.primary.main};
 `;
 
-export const CategoryValue = styled(Typography)`
-  font-weight: 500;
-`;
-
-export const CountLabel = styled(Typography)`
-  color: ${(props) => props.theme.palette.text.secondary};
-`;
-
-export const CountValue = styled(Typography)`
+export const RightPriceValue = styled(Typography)`
   font-weight: 700;
   color: ${(props) => props.theme.palette.primary.main};
 `;
+
 
 export const ActionContainer = styled(Box)`
   padding: 6px;

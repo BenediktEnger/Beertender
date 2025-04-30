@@ -6,11 +6,12 @@ import { DrinkDto } from '../../dtos/drink.dto.ts';
 import { AddButton, SearchForm, StyledTextField } from './DrinkSearchField.styles.tsx';
 import { LoadingContainer, SectionPaper, SectionTitle } from '../../pages/DrinksMainPage.styles.tsx';
 import useGetAllDrinks from '../../hooks/useGetAllDrinks.ts';
+import useAddUserDrink from '../../hooks/useAddUserDrink.ts';
+import { useTranslation } from 'react-i18next';
 
-interface DrinkSearchFieldProps {
-    onAddDrink: (drink: DrinkDto) => void
-}
-const DrinkSearchField: React.FC<DrinkSearchFieldProps> = ({ onAddDrink }) => {
+const DrinkSearchField = () => {
+  const { t } = useTranslation();
+
   const initializeSelectedDrink = () => ({
     name: '',
     category: '',
@@ -18,13 +19,14 @@ const DrinkSearchField: React.FC<DrinkSearchFieldProps> = ({ onAddDrink }) => {
     count: 0,
   });
 
+  const { mutate: addUserDrink } = useAddUserDrink();
   const { data: allDrinksDto } = useGetAllDrinks();
   const [selectedDrink, setSelectedDrink] = useState<DrinkDto>(initializeSelectedDrink);
 
   return (
     <SectionPaper elevation={3}>
       <SectionTitle variant="h6" gutterBottom>
-              Find Your Drink
+              {t('search.title')}
       </SectionTitle>
 
       {!allDrinksDto ?
@@ -35,7 +37,7 @@ const DrinkSearchField: React.FC<DrinkSearchFieldProps> = ({ onAddDrink }) => {
         <SearchForm
           onSubmit={(e) => {
             e.preventDefault();
-            onAddDrink(selectedDrink);
+            addUserDrink(selectedDrink);
             setSelectedDrink(initializeSelectedDrink());
           }}
         >
@@ -53,7 +55,7 @@ const DrinkSearchField: React.FC<DrinkSearchFieldProps> = ({ onAddDrink }) => {
             }}
             renderInput={(params) => <StyledTextField
               {...params}
-              label="Search or add a drink"
+              label={t('search.placeholder')}
               variant="outlined"
               autoFocus
               InputProps={{
@@ -77,7 +79,7 @@ const DrinkSearchField: React.FC<DrinkSearchFieldProps> = ({ onAddDrink }) => {
             type="submit"
             disabled={!selectedDrink.name}
           >
-                      Add Drink
+                      {t('search.addButton')}
           </AddButton>
         </SearchForm>
       }

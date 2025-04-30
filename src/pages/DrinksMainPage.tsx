@@ -12,8 +12,10 @@ import {
 import BeerLogo from '../assets/Beertender-logo.512x512.png';
 import DrinkSearchField from '../components/DrinkSearchField/DrinkSearchField.tsx';
 import CurrentUserDrinksContainer from '../components/DrinkCard/CurrentUserDrinksContainer.tsx';
+import { useTranslation } from 'react-i18next';
 
 const DrinksMainPage = () => {
+  const { t } = useTranslation();
   const { mutate: addUserDrink } = useAddUserDrink();
 
   const handleAddDrink = (drink: DrinkDto) => {
@@ -29,12 +31,12 @@ const DrinksMainPage = () => {
           <HeaderIcon>
             <StyledAppLogo
               src={BeerLogo}
-              alt="Beertender Logo"
+              alt={t('app.logoAlt')}
               variant="square"
             />
           </HeaderIcon> 
           <HeaderTitle variant="h4">
-            Beertender
+            {t('app.title')}
           </HeaderTitle>
         </HeaderContainer>
       </StyledAppBar>

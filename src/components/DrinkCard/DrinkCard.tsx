@@ -3,41 +3,45 @@ import { Divider, Tooltip } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import { DrinkDto } from '../../dtos/drink.dto.ts';
+import { useTranslation } from 'react-i18next';
 import {
   ActionContainer,
   AddButton,
   CardHeader,
   CardTitle,
-  CategoryContainer,
-  CategoryLabel,
-  CategoryValue,
   ContentRow,
   CountContainer,
-  CountLabel,
-  CountValue,
   IconContainer,
+  LeftCountValue,
   ReduceButton,
+  RightPriceValue,
   StyledCard,
   StyledCardContent,
 } from './DrinkCard.styles.tsx';
 import {
   AlcoholicIcon,
+  CocktailIcon,
   DefaultDrinkIcon,
   HotDrinkIcon,
   JuiceIcon,
   NonAlcoholicIcon,
   SoftDrinkIcon,
+  SpiritIcon,
   WineIcon,
-} from './DrinkIcons.styles.tsx';
+} from './DrinkIcons.styles.tsx'; // We're keeping the original category strings in the switch statement
 
+// We're keeping the original category strings in the switch statement
+// because these are used as keys in the data and shouldn't be translated
 function getDrinkIcon(type: string) {
   switch (type) {
   case 'Soft Drinks': return <SoftDrinkIcon />;
   case 'Juice': return <JuiceIcon />;
-  case 'Bier': return <AlcoholicIcon />;
+  case 'Beer': return <AlcoholicIcon />;
   case 'Hot Drinks': return <HotDrinkIcon />;
   case 'Non-Alcoholic': return <NonAlcoholicIcon />;
   case 'Wine': return <WineIcon />;
+  case 'Spirit': return <SpiritIcon/>;
+  case 'Cocktail': return <CocktailIcon/>;
   default: return <DefaultDrinkIcon />;
   }
 }
@@ -49,6 +53,7 @@ interface DrinkCardProps {
 }
 
 const DrinkCard: React.FC<DrinkCardProps> = ({ drink, onIncrease, onDecrease }) => {
+  const { t } = useTranslation();
   const categoryIcon = getDrinkIcon(drink.category);
 
   return (
@@ -64,22 +69,13 @@ const DrinkCard: React.FC<DrinkCardProps> = ({ drink, onIncrease, onDecrease }) 
 
       <StyledCardContent>
         <ContentRow>
-          <CategoryContainer>
-            <CategoryLabel variant="body2" gutterBottom>
-              Category
-            </CategoryLabel>
-            <CategoryValue variant="body1">
-              {drink.category}
-            </CategoryValue>
-          </CategoryContainer>
-
           <CountContainer>
-            <CountLabel variant="body2" gutterBottom>
-              Count
-            </CountLabel>
-            <CountValue variant="h6">
+            <LeftCountValue variant="h6">
               {drink.count}
-            </CountValue>
+            </LeftCountValue>
+            <RightPriceValue variant="h6" gutterBottom>
+              €{drink.price.toFixed(2)}
+            </RightPriceValue>
           </CountContainer>
         </ContentRow>
       </StyledCardContent>
@@ -87,20 +83,20 @@ const DrinkCard: React.FC<DrinkCardProps> = ({ drink, onIncrease, onDecrease }) 
       <Divider />
 
       <ActionContainer>
-        <Tooltip title="Remove one">
+        <Tooltip title={t('drinkCard.removeOneTooltip')}>
           <ReduceButton
             color="primary"
             onClick={onDecrease}
-            aria-label="increase count"
+            aria-label={t('drinkCard.increaseCountAriaLabel')}
           >
             <RemoveCircleOutlineIcon/>
           </ReduceButton>
         </Tooltip>
-        <Tooltip title="Add one more">
+        <Tooltip title={t('drinkCard.addOneTooltip')}>
           <AddButton 
             color="primary" 
             onClick={onIncrease} 
-            aria-label="increase count"
+            aria-label={t('drinkCard.increaseCountAriaLabel')}
           >
             <AddCircleOutlineIcon />
           </AddButton>

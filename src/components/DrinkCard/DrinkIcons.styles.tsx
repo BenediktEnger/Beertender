@@ -3,6 +3,8 @@ import LocalDrinkIcon from '@mui/icons-material/LocalDrink';
 import EmojiFoodBeverageIcon from '@mui/icons-material/EmojiFoodBeverage';
 import BeerIcon from '@mui/icons-material/SportsBar';
 import WineBarIcon from '@mui/icons-material/WineBar';
+import LiquorIcon from '@mui/icons-material/Liquor';
+import LocalBarIcon from '@mui/icons-material/LocalBar';
 
 const iconStyles = `
   font-size: 36px;
@@ -37,6 +39,17 @@ export const WineIcon = styled(WineBarIcon)`
   ${iconStyles}
   color: #b71c1c;
 `;
+
+export const SpiritIcon = styled(LiquorIcon)`
+  ${iconStyles}
+  color: #9c27b0;
+`;
+
+export const CocktailIcon = styled(LocalBarIcon)`
+  ${iconStyles}
+  color: #e91e63;
+`;
+
 
 export const DefaultDrinkIcon = styled(LocalDrinkIcon)`
   ${iconStyles}

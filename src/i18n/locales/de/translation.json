@@ -1,0 +1,39 @@
+{
+  "app": {
+    "title": "Beertender",
+    "logoAlt": "Beertender Logo"
+  },
+  "search": {
+    "title": "Finde dein Getränk",
+    "placeholder": "Suche oder füge ein Getränk hinzu",
+    "addButton": "Getränk hinzufügen"
+  },
+  "drinks": {
+    "total": "Gesamt: €{{amount}}",
+    "removeAll": "Alle entfernen",
+    "removeAllTooltip": "Alle Getränke entfernen",
+    "confirmRemoval": "Entfernung bestätigen",
+    "confirmRemovalMessage": "Bist du sicher, dass du alle Getränke aus deiner Liste entfernen möchtest?",
+    "cancel": "Abbrechen",
+    "confirm": "Bestätigen",
+    "emptyState": {
+      "title": "Noch keine Getränke hinzugefügt",
+      "subtitle": "Suche oben nach Getränken und füge sie deiner Sammlung hinzu"
+    }
+  },
+  "drinkCard": {
+    "category": "Kategorie",
+    "count": "Anzahl",
+    "removeOneTooltip": "Eines entfernen",
+    "addOneTooltip": "Eines hinzufügen",
+    "increaseCountAriaLabel": "Anzahl erhöhen"
+  },
+  "categories": {
+    "softDrinks": "Softgetränke",
+    "juice": "Saft",
+    "beer": "Bier",
+    "hotDrinks": "Heiße Getränke",
+    "nonAlcoholic": "Alkoholfrei",
+    "wine": "Wein"
+  }
+}
