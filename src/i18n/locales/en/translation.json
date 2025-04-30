@@ -35,5 +35,9 @@
     "hotDrinks": "Hot Drinks",
     "nonAlcoholic": "Non-Alcoholic",
     "wine": "Wine"
+  },
+  "emptyState": {
+    "title": "No drinks added yet",
+    "subtitle": "Search for drinks above and add them to your collection"
   }
 }

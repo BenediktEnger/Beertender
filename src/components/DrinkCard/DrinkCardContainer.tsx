@@ -10,6 +10,7 @@ import {
   EmptyStateSubtitle,
   EmptyStateTitle,
 } from './DrinkCardContainer.styles.tsx';
+import { useTranslation } from 'react-i18next';
 
 interface DrinkCardContainerProps {
     currentDrinks: DrinkDto[]
@@ -18,32 +19,38 @@ interface DrinkCardContainerProps {
 }
 
 const DrinkCardContainer: React.FC<DrinkCardContainerProps> = 
-({ currentDrinks, onIncreaseDrinkCount, onDecreaseDrinkCount }) => <CardGrid container spacing={3}>
-  {currentDrinks.map((drink) => <Grid size={{
-    xs: 6,
-    sm: 4,
-    md: 4, 
-  }} key={drink.name + drink.category}>
-    <DrinkCard
-      drink={drink}
-      onIncrease={() => onIncreaseDrinkCount(drink)}
-      onDecrease={() => onDecreaseDrinkCount(drink)}
-    />
-  </Grid>,
-  )}
+({ currentDrinks, onIncreaseDrinkCount, onDecreaseDrinkCount }) => {
+  const { t } = useTranslation();
 
-  {currentDrinks.length === 0 && 
+  return (
+    <CardGrid container spacing={3}>
+      {currentDrinks.map((drink) => <Grid size={{
+        xs: 6,
+        sm: 4,
+        md: 4, 
+      }} key={drink.name + drink.category}>
+        <DrinkCard
+          drink={drink}
+          onIncrease={() => onIncreaseDrinkCount(drink)}
+          onDecrease={() => onDecreaseDrinkCount(drink)}
+        />
+      </Grid>,
+      )}
+
+      {currentDrinks.length === 0 && 
         <EmptyStateContainer>
           <EmptyStateIcon>
             <LocalBarIcon />
           </EmptyStateIcon>
           <EmptyStateTitle variant="h6" align="center">
-            No drinks added yet
+            {t('emptyState.title')}
           </EmptyStateTitle>
           <EmptyStateSubtitle variant="body2" align="center">
-            Search for drinks above and add them to your collection
+            {t('emptyState.subtitle')}
           </EmptyStateSubtitle>
         </EmptyStateContainer>
-  }
-</CardGrid>;
+      }
+    </CardGrid>
+  ); 
+};
 export default DrinkCardContainer;

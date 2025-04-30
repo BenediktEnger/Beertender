@@ -1,11 +1,16 @@
 import styled from '@emotion/styled';
 import { AppBar, Avatar, Box, Container, Paper, Toolbar, Typography } from '@mui/material';
 
-export const PageContainer = styled(Box)`
-  min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
-  padding-bottom: max(16px, env(safe-area-inset-bottom, 16px));
+export const PageContainer = styled('div')`
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    box-sizing: border-box;
 `;
+
 
 export const StyledAppBar = styled(AppBar)`
   background: ${(props) => props.theme.palette.primary.main};
@@ -14,13 +19,12 @@ export const StyledAppBar = styled(AppBar)`
   top: 0;
   z-index: 1100;
 `;
-
 export const HeaderContainer = styled(Toolbar)`
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    display: flex;
     align-items: center;
     width: 100%;
     padding: 8px 16px;
+    position: relative;
 
     @media (max-width: 600px) {
         padding: 8px;
@@ -28,21 +32,26 @@ export const HeaderContainer = styled(Toolbar)`
 `;
 
 export const HeaderIcon = styled.div`
-    grid-column: 1;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    margin-right: 16px;
+
+    @media (max-width: 600px) {
+        margin-right: 12px;
+    }
 `;
 
 export const HeaderTitle = styled(Typography)`
-    grid-column: 2;
     font-weight: 700;
     letter-spacing: 0.5px;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    flex-grow: 1;
     text-align: center;
+    margin-right: 56px; /* Balances the space taken by the logo */
 
     @media (max-width: 600px) {
         font-size: 2rem;
+        margin-right: 40px;
     }
 `;
 
