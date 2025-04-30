@@ -2,7 +2,7 @@ import { Autocomplete, CircularProgress, InputAdornment } from '@mui/material';
 import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import { DrinkDto } from '../../dtos/drink.dto.ts';
-import { StyledTextField } from './DrinkSearchField.styles.tsx';
+import { DrinkNameLabel, DropDownElement, PriceLabel, StyledTextField } from './DrinkSearchField.styles.tsx';
 import { LoadingContainer, SectionPaper, SectionTitle } from '../../pages/DrinksMainPage.styles.tsx';
 import useGetAllDrinks from '../../hooks/useGetAllDrinks.ts';
 import useAddUserDrink from '../../hooks/useAddUserDrink.ts';
@@ -61,16 +61,26 @@ const DrinkSearchField = () => {
             InputProps={{
               ...params.InputProps,
               startAdornment:
-                                  <>
-                                    <InputAdornment position="start">
-                                      <SearchIcon color="action" />
-                                    </InputAdornment>
-                                    {params.InputProps.startAdornment}
-                                  </>,
-
+                    <>
+                      <InputAdornment position="start">
+                        <SearchIcon color="action" />
+                      </InputAdornment>
+                      {params.InputProps.startAdornment}
+                    </>,
             }}
-          />
+          />}
+          renderOption={(props, option) => <li {...props}>
+            <DropDownElement>
+              <DrinkNameLabel variant="subtitle1">
+                {option.name}
+              </DrinkNameLabel>
+              <PriceLabel variant="caption" >
+                    €{option.price.toFixed(2)}
+              </PriceLabel>
+            </DropDownElement>
+          </li>
           }
+
         />
       }
     </SectionPaper>
