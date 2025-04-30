@@ -16,11 +16,11 @@ export const StyledAppBar = styled(AppBar)`
 `;
 
 export const HeaderContainer = styled(Toolbar)`
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     width: 100%;
-    position: relative;
-    justify-content: center;
+    padding: 8px 16px;
 
     @media (max-width: 600px) {
         padding: 8px;
@@ -28,17 +28,14 @@ export const HeaderContainer = styled(Toolbar)`
 `;
 
 export const HeaderIcon = styled.div`
-    position: absolute;
-    left: 16px;
+    grid-column: 1;
     display: flex;
     align-items: center;
-
-    @media (max-width: 600px) {
-        left: 8px;
-    }
+    justify-content: flex-start;
 `;
 
 export const HeaderTitle = styled(Typography)`
+    grid-column: 2;
     font-weight: 700;
     letter-spacing: 0.5px;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
