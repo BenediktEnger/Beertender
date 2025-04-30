@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
-import { Box, Button, TextField } from '@mui/material';
+import { Button, TextField } from '@mui/material';
+import { Form } from 'react-router-dom';
 
-export const SearchForm = styled(Box)`
+export const SearchForm = styled(Form)`
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -45,7 +46,7 @@ export const AddButton = styled(Button)`
   font-weight: 600;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: all 0.2s;
-  background: ${props => props.theme.palette.primary.main};
+  background: ${(props) => props.theme.palette.primary.main};
   
   &:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);

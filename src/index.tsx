@@ -1,6 +1,5 @@
 import App from './App';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from './shared/contexts/ThemeContext';
 import { DomainServiceProvider } from './shared/contexts/ServiceContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -12,14 +11,12 @@ const queryClient = new QueryClient();
 
 root.render(
   <StrictMode>
-    <BrowserRouter>
-      <ThemeProvider>
-        <QueryClientProvider client={queryClient}>
-          <DomainServiceProvider>
-            <App />
-          </DomainServiceProvider>
-        </QueryClientProvider>
-      </ThemeProvider>
-    </BrowserRouter>
+    <ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <DomainServiceProvider>
+          <App />
+        </DomainServiceProvider>
+      </QueryClientProvider>
+    </ThemeProvider>
   </StrictMode>,
 );

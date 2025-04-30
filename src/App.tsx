@@ -1,8 +1,6 @@
-import DrinksMainPage from './pages/DrinksMainPage.tsx';
-
+import { RouterProvider } from 'react-router-dom';
+import { router } from './AppRouter.tsx';
 
 export default function App() {
-  return (
-    <DrinksMainPage/>
-  );
+  return <RouterProvider router={router} />;
 }
