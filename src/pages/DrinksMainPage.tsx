@@ -2,7 +2,7 @@ import { Box, CircularProgress, Typography } from '@mui/material';
 import DrinkSearchField from '../components/DrinkSearchField/DrinkSearchField.tsx';
 import useGetAllDrinks from '../hooks/useGetAllDrinks.ts';
 import { DrinkDto } from '../dtos/drink.dto.ts';
-import useAddUserDrink from '../hooks/useAddUserDrinks.ts';
+import useAddUserDrink from '../hooks/useAddUserDrink.ts';
 import useGetUserDrinks from '../hooks/useGetUserDrinks.ts';
 import DrinkCardContainer from '../components/DrinkCard/DrinkCardContainer.tsx';
 import {
@@ -19,15 +19,24 @@ import {
 } from './DrinksMainPage.styles.tsx';
 import { useCallback } from 'react';
 import BeerLogo from '../assets/Beertender-logo.512x512.png';
+import useReduceUserDrink from '../hooks/useReduceUserDrink.ts';
 
 const DrinksMainPage = () => {
   const { data: allDrinksDto } = useGetAllDrinks();
   const { mutate: addUserDrink } = useAddUserDrink();
+  const { mutate: reduceUserDrink } = useReduceUserDrink();
+
   const { data: userDrinksDto } = useGetUserDrinks();
 
   const handleAddDrink = (drink: DrinkDto) => {
     if (drink) {
       addUserDrink(drink);
+    }
+  };
+
+  const handleRemoveDrinkCount = (drink: DrinkDto) => {
+    if (drink) {
+      reduceUserDrink(drink);
     }
   };
 
@@ -94,7 +103,7 @@ const DrinksMainPage = () => {
               <CircularProgress />
             </LoadingContainer>
             : 
-            <DrinkCardContainer currentDrinks={userDrinksDto} onIncreaseDrinkCount={handleAddDrink} />
+            <DrinkCardContainer currentDrinks={userDrinksDto} onIncreaseDrinkCount={handleAddDrink} onDecreaseDrinkCount={handleRemoveDrinkCount} />
           }
         </SectionPaper>
       </ContentContainer>

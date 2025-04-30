@@ -15,6 +15,28 @@ export class LocalUserStorageDrinksAdapter implements UserDrinksPort {
     this.storageKey = storageKey;
   }
 
+  public removeDrink(drink: DrinkEntity): Promise<any> {
+    try {
+      const currentDrinks = this.getLocalUserDrinks();
+
+      const drinkIndex = currentDrinks.findIndex(
+        (storedDrink) => storedDrink.name === drink.name && storedDrink.category === drink.category,
+      );
+      if (drinkIndex !== -1) {
+        currentDrinks.splice(drinkIndex, 1);
+
+        window.localStorage.setItem(this.storageKey, JSON.stringify(currentDrinks));
+      } else {
+        console.warn(`Drink ${drink.name} not found in storage, cannot update.`);
+      }
+
+      return Promise.resolve();
+    } catch (error) {
+      console.error(`Error updating drink in localStorage: ${error}`);
+      return Promise.reject(error);
+    }
+  }
+
   public updateDrink(drink: DrinkEntity): Promise<void> {
     try {
       const currentDrinks = this.getLocalUserDrinks();

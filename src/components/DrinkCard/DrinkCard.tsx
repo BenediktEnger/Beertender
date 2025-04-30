@@ -1,6 +1,7 @@
 import React from 'react';
 import { Divider, Tooltip } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import { DrinkDto } from '../../dtos/drink.dto.ts';
 import {
   ActionContainer,
@@ -15,6 +16,7 @@ import {
   CountLabel,
   CountValue,
   IconContainer,
+  ReduceButton,
   StyledCard,
   StyledCardContent,
 } from './DrinkCard.styles.tsx';
@@ -43,9 +45,10 @@ function getDrinkIcon(type: string) {
 interface DrinkCardProps {
     drink: DrinkDto;
     onIncrease: () => void;
+    onDecrease: () => void;
 }
 
-const DrinkCard: React.FC<DrinkCardProps> = ({ drink, onIncrease }) => {
+const DrinkCard: React.FC<DrinkCardProps> = ({ drink, onIncrease, onDecrease }) => {
   const categoryIcon = getDrinkIcon(drink.category);
 
   return (
@@ -84,6 +87,15 @@ const DrinkCard: React.FC<DrinkCardProps> = ({ drink, onIncrease }) => {
       <Divider />
 
       <ActionContainer>
+        <Tooltip title="Remove one">
+          <ReduceButton
+            color="primary"
+            onClick={onDecrease}
+            aria-label="increase count"
+          >
+            <RemoveCircleOutlineIcon/>
+          </ReduceButton>
+        </Tooltip>
         <Tooltip title="Add one more">
           <AddButton 
             color="primary" 

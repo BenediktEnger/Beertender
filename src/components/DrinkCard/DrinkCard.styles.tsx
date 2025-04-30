@@ -16,7 +16,7 @@ export const StyledCard = styled(Card)`
 
 export const CardHeader = styled(Box)`
   padding: 8px;
-  background: ${props => `linear-gradient(45deg, ${props.theme.palette.primary.main}80 0%, ${props.theme.palette.primary.main}20 100%)`};
+  background: ${(props) => `linear-gradient(45deg, ${props.theme.palette.primary.main}80 0%, ${props.theme.palette.primary.main}20 100%)`};
   display: flex;
   align-items: center;
   gap: 8px;
@@ -57,7 +57,7 @@ export const CountContainer = styled(Box)`
 `;
 
 export const CategoryLabel = styled(Typography)`
-  color: ${props => props.theme.palette.text.secondary};
+  color: ${(props) => props.theme.palette.text.secondary};
 `;
 
 export const CategoryValue = styled(Typography)`
@@ -65,12 +65,12 @@ export const CategoryValue = styled(Typography)`
 `;
 
 export const CountLabel = styled(Typography)`
-  color: ${props => props.theme.palette.text.secondary};
+  color: ${(props) => props.theme.palette.text.secondary};
 `;
 
 export const CountValue = styled(Typography)`
   font-weight: 700;
-  color: ${props => props.theme.palette.primary.main};
+  color: ${(props) => props.theme.palette.primary.main};
 `;
 
 export const ActionContainer = styled(Box)`
@@ -80,6 +80,13 @@ export const ActionContainer = styled(Box)`
 `;
 
 export const AddButton = styled(IconButton)`
+  background-color: rgba(25, 118, 210, 0.08);
+  &:hover {
+    background-color: rgba(25, 118, 210, 0.15);
+  }
+`;
+
+export const ReduceButton = styled(IconButton)`
   background-color: rgba(25, 118, 210, 0.08);
   &:hover {
     background-color: rgba(25, 118, 210, 0.15);

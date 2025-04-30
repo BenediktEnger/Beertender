@@ -14,9 +14,11 @@ import {
 interface DrinkCardContainerProps {
     currentDrinks: DrinkDto[]
     onIncreaseDrinkCount: (drink: DrinkDto) => void;
+    onDecreaseDrinkCount: (drink: DrinkDto) => void;
 }
 
-const DrinkCardContainer: React.FC<DrinkCardContainerProps> = ({ currentDrinks, onIncreaseDrinkCount }) => <CardGrid container spacing={3}>
+const DrinkCardContainer: React.FC<DrinkCardContainerProps> = 
+({ currentDrinks, onIncreaseDrinkCount, onDecreaseDrinkCount }) => <CardGrid container spacing={3}>
   {currentDrinks.map((drink) => <Grid size={{
     xs: 6,
     md: 4, 
@@ -24,6 +26,7 @@ const DrinkCardContainer: React.FC<DrinkCardContainerProps> = ({ currentDrinks, 
     <DrinkCard
       drink={drink}
       onIncrease={() => onIncreaseDrinkCount(drink)}
+      onDecrease={() => onDecreaseDrinkCount(drink)}
     />
   </Grid>,
   )}

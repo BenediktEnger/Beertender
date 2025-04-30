@@ -3,7 +3,7 @@ import { useDomainServices } from '../shared/contexts/ServiceContext';
 import { DrinkDto } from '../dtos/drink.dto.ts';
 import { DrinkEntity } from '../domain/entities/drink.entity.ts';
 
-const useAddUserDrinks = () => {
+const useAddUserDrink = () => {
   const { addDrink } = useDomainServices();
   const queryClient = useQueryClient();
 
@@ -27,4 +27,4 @@ const useAddUserDrinks = () => {
 
   return updateDrink;
 };
-export default useAddUserDrinks;
+export default useAddUserDrink;

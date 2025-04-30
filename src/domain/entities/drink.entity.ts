@@ -26,6 +26,12 @@ export class DrinkEntity {
     this._count++;
   }
 
+  public decreaseCount() {
+    if (this._count > 0) {
+      this._count--;
+    }
+  }
+
   public getTotalPrice() {
     return this._price * this._count;
   }
