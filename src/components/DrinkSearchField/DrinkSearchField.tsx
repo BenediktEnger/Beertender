@@ -24,6 +24,10 @@ const DrinkSearchField = () => {
 
   const handleSubmit = (drink: DrinkDto) => {
     if (drink) {
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+
       addUserDrink(drink);
       setSelectedDrink(initializeSelectedDrink());
     }
