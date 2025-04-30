@@ -3,11 +3,7 @@ import { useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 import { DrinkDto } from '../../dtos/drink.dto.ts';
-import {
-  SearchForm,
-  StyledTextField,
-  AddButton
-} from './DrinkSearchField.styles.tsx';
+import { AddButton, SearchForm, StyledTextField } from './DrinkSearchField.styles.tsx';
 
 interface DrinkSearchFieldProps {
     drinkSelections: DrinkDto[]
@@ -25,7 +21,6 @@ const DrinkSearchField: React.FC<DrinkSearchFieldProps> = ({ drinkSelections, on
 
   return (
     <SearchForm
-      component="form"
       onSubmit={(e) => {
         e.preventDefault();
         onAddDrink(selectedDrink);
@@ -44,25 +39,24 @@ const DrinkSearchField: React.FC<DrinkSearchFieldProps> = ({ drinkSelections, on
             setSelectedDrink(initializeSelectedDrink());
           }
         }}
-        renderInput={(params) => (
-          <StyledTextField
-            {...params}
-            label="Search or add a drink"
-            variant="outlined"
-            autoFocus
-            InputProps={{
-              ...params.InputProps,
-              startAdornment: (
+        renderInput={(params) => <StyledTextField
+          {...params}
+          label="Search or add a drink"
+          variant="outlined"
+          autoFocus
+          InputProps={{
+            ...params.InputProps,
+            startAdornment: 
                 <>
                   <InputAdornment position="start">
                     <SearchIcon color="action" />
                   </InputAdornment>
                   {params.InputProps.startAdornment}
-                </>
-              )
-            }}
-          />
-        )}
+                </>,
+              
+          }}
+        />
+        }
       />
       <AddButton
         variant="contained"

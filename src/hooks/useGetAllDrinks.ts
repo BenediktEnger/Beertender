@@ -12,6 +12,7 @@ const useGetAllDrinks = () => {
         name: drinkEntity.name,
         price: drinkEntity.getSinglePrice(),
         category: drinkEntity.category,
+        count: drinkEntity.count,
       }));
       return drinkDtos;
     },

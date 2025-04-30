@@ -1,12 +1,8 @@
-import '@mui/lab/themeAugmentation';
-
 import { createTheme as createMuiTheme } from '@mui/material/styles';
 import variants from './variants';
-import typography from './typography';
 import breakpoints from './breakpoints';
 import components from './components';
 import shadows from './shadows';
-import { TypographyOptions } from '@mui/material/styles/createTypography';
 
 const createTheme = (name: string) => {
   let themeConfig = variants.find((variant) => variant.name === name);
@@ -22,7 +18,10 @@ const createTheme = (name: string) => {
       breakpoints: breakpoints,
       // @ts-expect-error Incompatible types
       components: components,
-      typography: typography as TypographyOptions,
+      typography: {
+        fontFamily: 'Roboto, Arial, sans-serif',
+        // other typography options
+      },
       shadows: shadows,
       palette: themeConfig.palette,
     },

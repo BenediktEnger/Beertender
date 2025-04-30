@@ -16,6 +16,7 @@ const themeOptions: Record<string, ThemeOptions> = {
 
 const initialState = {
   themeName: THEMES.DEFAULT,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setTheme: (themeName: string) => {},
 };
 const ThemeContext = React.createContext(initialState);
