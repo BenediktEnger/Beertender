@@ -71,20 +71,38 @@ export const StyledAppLogo = styled(Avatar)`
 `;
 
 export const SectionHeaderContainer = styled(Box)`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+
+    @media (max-width: 599px) {
+        margin-bottom: 8px;
+    }
 `;
+
 
 export const TitleButtonContainer = styled(Box)`
-  display: flex;
-  align-items: center;
-  gap: 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    justify-content: flex-end;
+
+    @media (max-width: 480px) {
+        gap: 8px;
+    }
 `;
 
+
 export const RemoveAllButton = styled(Button)`
-  border-radius: 20px;
-  text-transform: none;
-  font-size: 0.8rem;
+    border-radius: 20px;
+    text-transform: none;
+    font-size: 0.8rem;
 `;
+
+export const TotalSumContainer = styled(Typography)`
+    font-weight: bold;
+`;
+

@@ -21,6 +21,7 @@ const DrinkCardContainer: React.FC<DrinkCardContainerProps> =
 ({ currentDrinks, onIncreaseDrinkCount, onDecreaseDrinkCount }) => <CardGrid container spacing={3}>
   {currentDrinks.map((drink) => <Grid size={{
     xs: 6,
+    sm: 4,
     md: 4, 
   }} key={drink.name + drink.category}>
     <DrinkCard

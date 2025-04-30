@@ -9,10 +9,10 @@ import {
   RemoveAllButton,
   SectionHeaderContainer,
   SectionPaper,
-  SectionTitle,
   TitleButtonContainer,
+  TotalSumContainer,
 } from './CurrentUserDrinksContainer.styles.tsx';
-import { CircularProgress, Tooltip, Typography } from '@mui/material';
+import { CircularProgress, Tooltip } from '@mui/material';
 import DrinkCardContainer from './DrinkCardContainer.tsx';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 
@@ -27,7 +27,7 @@ const CurrentUserDrinksContainer = () => {
       addUserDrink(drink);
     }
   };
-    
+
   const handleRemoveDrinkCount = (drink: DrinkDto) => {
     if (drink) {
       reduceUserDrink(drink);
@@ -45,10 +45,11 @@ const CurrentUserDrinksContainer = () => {
   return (
     <SectionPaper elevation={3}>
       <SectionHeaderContainer>
+        <TotalSumContainer variant="h6" color="primary">
+          Total: €{getTotalSum().toFixed(2)}
+        </TotalSumContainer>
         <TitleButtonContainer>
-          <SectionTitle variant="h6">
-                        Your Drinks
-          </SectionTitle>
+
           {userDrinksDto && userDrinksDto.length > 0 &&
                       <Tooltip title="Remove all drinks">
                         <RemoveAllButton
@@ -63,9 +64,7 @@ const CurrentUserDrinksContainer = () => {
                       </Tooltip>
           }
         </TitleButtonContainer>
-        <Typography variant="h6" color="primary" fontWeight="bold">
-                    Total: €{getTotalSum().toFixed(2)}
-        </Typography>
+
       </SectionHeaderContainer>
 
       {!userDrinksDto ?

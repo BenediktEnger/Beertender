@@ -18,7 +18,8 @@ export const CardHeader = styled(Box)`
   padding: 8px;
   background: ${(props) => `linear-gradient(45deg, ${props.theme.palette.primary.main}80 0%, ${props.theme.palette.primary.main}20 100%)`};
   display: flex;
-  align-items: center;
+    flex-direction: column;
+    align-items: center;
   gap: 8px;
 `;
 
