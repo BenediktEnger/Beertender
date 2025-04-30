@@ -19,12 +19,12 @@ export const StyledAppBar = styled(AppBar)`
   top: 0;
   z-index: 1100;
 `;
+
 export const HeaderContainer = styled(Toolbar)`
     display: flex;
     align-items: center;
     width: 100%;
     padding: 8px 16px;
-    position: relative;
 
     @media (max-width: 600px) {
         padding: 8px;
@@ -34,27 +34,19 @@ export const HeaderContainer = styled(Toolbar)`
 export const HeaderIcon = styled.div`
     display: flex;
     align-items: center;
-    margin-right: 16px;
-
-    @media (max-width: 600px) {
-        margin-right: 12px;
-    }
+    justify-content: flex-start;
 `;
 
 export const HeaderTitle = styled(Typography)`
     font-weight: 700;
+    display: flex;
     letter-spacing: 0.5px;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-    flex-grow: 1;
-    text-align: center;
-    margin-right: 56px; /* Balances the space taken by the logo */
-
+    justify-content: center;
     @media (max-width: 600px) {
         font-size: 2rem;
-        margin-right: 40px;
     }
 `;
-
 
 export const ContentContainer = styled(Container)`
   max-width: 900px;
