@@ -1,5 +1,3 @@
-import { DrinkDto } from '../dtos/drink.dto.ts';
-import useAddUserDrink from '../hooks/useAddUserDrink.ts';
 import {
   ContentContainer,
   HeaderContainer,
@@ -16,17 +14,10 @@ import { useTranslation } from 'react-i18next';
 
 const DrinksMainPage = () => {
   const { t } = useTranslation();
-  const { mutate: addUserDrink } = useAddUserDrink();
-
-  const handleAddDrink = (drink: DrinkDto) => {
-    if (drink) {
-      addUserDrink(drink);
-    }
-  };
 
   return (
     <PageContainer>
-      <StyledAppBar position="static" elevation={0}>
+      <StyledAppBar position="sticky" elevation={0}>
         <HeaderContainer>
           <HeaderIcon>
             <StyledAppLogo
@@ -42,7 +33,7 @@ const DrinksMainPage = () => {
       </StyledAppBar>
 
       <ContentContainer maxWidth="md">
-        <DrinkSearchField onAddDrink={handleAddDrink} />
+        <DrinkSearchField />
 
         <CurrentUserDrinksContainer />
 

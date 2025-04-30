@@ -4,31 +4,51 @@ import { AppBar, Avatar, Box, Container, Paper, Toolbar, Typography } from '@mui
 export const PageContainer = styled(Box)`
   min-height: 100vh;
   background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
-  padding-bottom: 16px;
+  padding-bottom: max(16px, env(safe-area-inset-bottom, 16px));
 `;
 
 export const StyledAppBar = styled(AppBar)`
   background: ${(props) => props.theme.palette.primary.main};
   margin-bottom: 16px;
+  padding-top: env(safe-area-inset-top, 0);
+  top: 0;
+  z-index: 1100;
 `;
 
 export const HeaderContainer = styled(Toolbar)`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    justify-content: center;
+
+    @media (max-width: 600px) {
+        padding: 8px;
+    }
 `;
 
 export const HeaderIcon = styled.div`
-  font-size: 32px;
-  margin-right: 8px;
+    position: absolute;
+    left: 16px;
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 600px) {
+        left: 8px;
+    }
 `;
 
 export const HeaderTitle = styled(Typography)`
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    text-align: center;
+
+    @media (max-width: 600px) {
+        font-size: 2rem;
+    }
 `;
+
 
 export const ContentContainer = styled(Container)`
   max-width: 900px;
