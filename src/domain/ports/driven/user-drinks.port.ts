@@ -5,4 +5,5 @@ export default interface UserDrinksPort {
     getUserDrinks(): Promise<DrinkEntity[]>
     updateDrink(drink: DrinkEntity): Promise<any>
     removeDrink(drink: DrinkEntity): Promise<any>
-}
+    removeAllDrinks(): Promise<any>
+};

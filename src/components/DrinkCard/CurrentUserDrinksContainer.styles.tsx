@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { AppBar, Avatar, Box, Container, Paper, Toolbar, Typography } from '@mui/material';
+import { AppBar, Avatar, Box, Button, Container, Divider, Paper, Toolbar, Typography } from '@mui/material';
 
 export const PageContainer = styled(Box)`
   min-height: 100vh;
@@ -49,6 +49,9 @@ export const SectionTitle = styled(Typography)`
   margin-bottom: 8px;
 `;
 
+export const StyledDivider = styled(Divider)`
+  margin-bottom: 12px;
+`;
 
 export const LoadingContainer = styled(Box)`
   display: flex;
@@ -65,4 +68,23 @@ export const StyledAppLogo = styled(Avatar)`
   & img {
     object-fit: contain;
   }
+`;
+
+export const SectionHeaderContainer = styled(Box)`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+`;
+
+export const TitleButtonContainer = styled(Box)`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+`;
+
+export const RemoveAllButton = styled(Button)`
+  border-radius: 20px;
+  text-transform: none;
+  font-size: 0.8rem;
 `;

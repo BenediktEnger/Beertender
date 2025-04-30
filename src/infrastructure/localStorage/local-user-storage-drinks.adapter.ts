@@ -15,6 +15,15 @@ export class LocalUserStorageDrinksAdapter implements UserDrinksPort {
     this.storageKey = storageKey;
   }
 
+  removeAllDrinks(): Promise<any> {
+    try {
+      window.localStorage.removeItem(this.storageKey);
+    } catch (error) {
+      console.error(`Error removing all drinks from localStorage: ${error}`);
+    }
+    return Promise.resolve();
+  }
+
   public removeDrink(drink: DrinkEntity): Promise<any> {
     try {
       const currentDrinks = this.getLocalUserDrinks();
