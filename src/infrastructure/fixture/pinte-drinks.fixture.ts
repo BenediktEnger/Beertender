@@ -20,7 +20,7 @@ export const PinteDrinks = [
     price: 3.10, 
   },
   {
-    name: 'Weizen-Hefe',
+    name: 'Weizen-Kristall',
     type: 'Beer',
     price: 3.10, 
   },
